@@ -1,5 +1,5 @@
 from flask import *
-from sensor import get_data
+from sensor import get_dht22_data,get_bmp180_data
 import json
 
 app = Flask(__name__)
@@ -7,9 +7,10 @@ app = Flask(__name__)
 
 @app.route('/senzor')
 def senzor():
-    temp,hum = get_data()
-    data = {'temperature':temp,
-    	      'humidity':hum}
+    dht22Data  = get_dht22_data()
+    bmp180Data = get_bmp180_data()
+    data = {'dht22':dht22Data,
+    	    'bmp180':bmp180Data}
     return json.dumps(data)
 
 @app.route()
