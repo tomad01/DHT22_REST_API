@@ -6,6 +6,7 @@ import time,csv
 
 def get_dht22_data():
     try:
+        # data connected at pin 4
         h,t = dht.read_retry(dht.DHT22, 4)
         status = "Ok"
     except Exception as er:
@@ -19,6 +20,8 @@ def get_dht22_data():
 
 def get_bmp180_data():
     try:
+        # i2c on channel 77 (pin 2 data,pin 3 clock)
+        # "sudo i2cdetect -y 1" - to check channel
         bmp = BMP085.BMP085()
         status = "Ok"
         temp = bmp.read_temperature()
